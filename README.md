@@ -25,6 +25,8 @@ docker compose up --build
 
 - API: http://localhost:5000/api/messages
 - Frontend: http://localhost:3000
+- PostgreSQL data is stored in the `postgres_data` named volume and survives container recreation.
+- The API and database communicate over the private `backend` network. The frontend is served separately; the browser reaches the API through its published localhost port.
 
 ## Before changing anything
 
