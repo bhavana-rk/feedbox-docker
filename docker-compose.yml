@@ -3,6 +3,10 @@ services:
     image: postgres:15
     env_file:
       - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
 
   api:
     build: .
@@ -12,10 +16,20 @@ services:
       - .env
     depends_on:
       - db
+    networks:
+      - backend
 
   web:
     build: ./client
     ports:
       - "3000:80"
-    depends_on:
-      - api
+    networks:
+      - frontend
+
+networks:
+  backend:
+    internal: true
+  frontend:
+
+volumes:
+  postgres_data:
